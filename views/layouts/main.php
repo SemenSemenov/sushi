@@ -22,19 +22,19 @@ AppAsset::register($this);
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <?= Html::csrfMetaTags() ?>
-    <title><?= Html::encode($this->title) ?></title>
+    <title><?= Html::encode($this->title)?></title>
     <?php $this->head() ?>
 </head>
 <body>
-<?php $this->beginBody() ?>
-
+<?php $this->beginBody()?>
 <section class="body">
     <header>
         <div class="container">
             <div class="header">
                 <a href="/">На главную</a>
+
                 <a href="#">Вход в админку</a>
-                <a href="#">Корзина</a>
+                <a href="#" onclick="openCart(event)">Корзина</a>
                 <form method="get" action="<?= Url::to(['category/search']) ?>">
                     <input type="text" style="padding: 5px" placeholder="Поиск..." name="search">
                 </form>
@@ -52,6 +52,14 @@ AppAsset::register($this);
         </div>
     </footer>
 </section>
+<div id="cart" class="modal fade bd-example-modal-xl" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+
+        </div>
+    </div>
+</div>
+
 <?php $this->endBody() ?>
 </body>
 </html>

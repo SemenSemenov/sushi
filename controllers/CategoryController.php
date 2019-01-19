@@ -23,6 +23,7 @@ class CategoryController extends Controller
         return $this->render('view', compact('goods'));
     }
 
+
     public function actionSearch()
     {
         $search = Yii::$app->request->get('search');

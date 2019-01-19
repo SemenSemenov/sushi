@@ -20,6 +20,9 @@ body {
     margin-top: 0;
     margin-bottom: 0;
     font-family: Arial;
+    background-image: url("/../img/sushi.jpg");
+    background-repeat: repeat;
+    background-attachment: fixed;
 }
 
 .body {
@@ -27,8 +30,8 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-}
 
+}
 .nav-menu {
     margin: 0 auto;
     width: 500px;
@@ -36,9 +39,12 @@ body {
     justify-content: space-between;
     font-size: 25px;
     cursor: pointer;
+    background: #fff;
+    border-radius: 10px;
 }
 
 .nav-menu a {
+
     padding: 20px;
 }
 
@@ -98,4 +104,9 @@ header {
 
 .header {
     justify-content: space-around;
+}
+
+.empty-cart {
+    max-height: 500px;
+    max-width: 400px;
 }

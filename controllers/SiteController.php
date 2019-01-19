@@ -60,7 +60,9 @@ class SiteController extends Controller
      * @return string
      */
     public function actionIndex()
+
     {
+        Yii::$app->view->title = "Название страницы";
         return $this->render('index');
     }
 
