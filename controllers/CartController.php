@@ -34,7 +34,24 @@ class CartController extends Controller
         $cart = new Cart();
         $cart->addToCart($good);
         return $this->renderPartial('cart', compact('good', 'session'));
-
     }
 
+    public function actionClear()
+    {
+        $session = Yii::$app->session;
+        $session->open();
+        $session->remove('cart');
+        $session->remove('cart.totalQuantity');
+        $session->remove('cart.totalSum');
+        return $this->renderPartial('cart', compact('session'));
+    }
+
+    public function actionDelete($id)
+    {
+        $session = Yii::$app->session;
+        $session->open();
+        $cart = new Cart;
+        $cart->recalcCart($id);
+        return $this->renderPartial('cart', compact('session'));
+    }
 }

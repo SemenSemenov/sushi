@@ -1,4 +1,5 @@
 <?php use yii\helpers\Url; ?>
+<?php $this->title = 'Вкусные Суши || ' . $good['name']; ?>
 <div class="container">
     <div class="row justify-content-md-center">
         <div class="col-8 justify-self-center">
