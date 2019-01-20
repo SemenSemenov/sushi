@@ -17,17 +17,12 @@ use Yii;
  */
 class OrderGood extends \yii\db\ActiveRecord
 {
-    /**
-     * {@inheritdoc}
-     */
+
     public static function tableName()
     {
         return 'order_good';
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function rules()
     {
         return [
@@ -40,16 +35,4 @@ class OrderGood extends \yii\db\ActiveRecord
     /**
      * {@inheritdoc}
      */
-    public function attributeLabels()
-    {
-        return [
-            'id' => 'ID',
-            'order_id' => 'Order ID',
-            'product_id' => 'Product ID',
-            'name' => 'Name',
-            'price' => 'Price',
-            'quantity' => 'Quantity',
-            'sum' => 'Sum',
-        ];
-    }
 }

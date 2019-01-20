@@ -10,8 +10,11 @@ namespace app\controllers;
 
 
 use app\models\Cart;
+use app\widgets\Alert;
 use yii\web\Controller;
 use app\models\Good;
+use app\models\Order;
+use app\models\OrderGood;
 use Yii;
 
 class CartController extends Controller
@@ -59,6 +62,28 @@ class CartController extends Controller
     {
         $session = Yii::$app->session;
         $session->open();
-        return $this->renderPartial('order', compact('session'));
+        $order = new Order;
+        if($session['cart.totalSum']) {
+            if ($order->load(Yii::$app->request->post())){
+                $order->date = date('Y-m-d H:i:s');
+                $order->sum = $session['cart.totalSum'];
+
+                if ($order->save()){
+                    Yii::$app->mailer->compose()
+                        ->setFrom(['aaa@aaaa.ru' => 'test test'])
+                        ->setTo('asdasd@sdadas.ru')
+                        ->setSubject('Ваш заказ принят')
+                        ->send();
+                    $session->remove('cart');
+                    $session->remove('cart.totalQuantity');
+                    $session->remove('cart.totalSum');
+                    return $this->render('success', compact('session'));
+                }
+            }
+        }else {
+            echo 'Что-то пошло не так';
+        }
+        $this->layout = 'empty-layout';
+        return $this->render('order', compact('session', 'order'));
     }
 }

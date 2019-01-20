@@ -114,3 +114,16 @@ header {
     max-height: 500px;
     max-width: 400px;
 }
+
+#order {
+    padding: 20px;
+}
+
+form {
+    margin: 20px;
+    padding: 20px;
+}
+
+.header-order {
+    margin: 20px;
+}

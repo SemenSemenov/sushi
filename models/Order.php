@@ -18,17 +18,12 @@ use Yii;
  */
 class Order extends \yii\db\ActiveRecord
 {
-    /**
-     * {@inheritdoc}
-     */
+
     public static function tableName()
     {
         return 'order';
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function rules()
     {
         return [
@@ -38,20 +33,13 @@ class Order extends \yii\db\ActiveRecord
         ];
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
-            'date' => 'Date',
-            'name' => 'Name',
-            'email' => 'Email',
-            'phone' => 'Phone',
-            'address' => 'Address',
-            'sum' => 'Sum',
-            'status' => 'Status',
+            'name' => 'Имя',
+            'email' => 'E-mail',
+            'phone' => 'Телефон',
+            'address' => 'Адрес',
         ];
     }
 }
