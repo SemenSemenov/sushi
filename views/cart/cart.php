@@ -39,7 +39,7 @@
 </div>
 <?php } else { ?>
     <div class="row justify-content-center">
-        <h4 class="col-12 text-center">В Вашей карзине ничего нет :(</h4>
+        <h4 class="col-12 text-center">В Вашей корзине ничего нет :(</h4>
         <div class="empty-cart col-12"><img src="/img/empty_cart.jpg"  alt="cart empty"></div>
         <div class="modal-buttons col-12" style="display: flex; padding: 15px; justify-content: space-around">
             <button type="button" class="btn btn-secondary btn-close">Продолжить покупки</button>
