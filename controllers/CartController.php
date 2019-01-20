@@ -54,4 +54,11 @@ class CartController extends Controller
         $cart->recalcCart($id);
         return $this->renderPartial('cart', compact('session'));
     }
+
+    public function actionOrder()
+    {
+        $session = Yii::$app->session;
+        $session->open();
+        return $this->renderPartial('order', compact('session'));
+    }
 }
