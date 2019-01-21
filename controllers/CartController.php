@@ -64,7 +64,7 @@ class CartController extends Controller
         $session = Yii::$app->session;
         $session->open();
         if (!$session['cart.totalSum']) {
-            return Yii::$app->response->redirect(Url::to('/'));
+            return $this->render('success', compact('session', 'currentId'));
         }
         $order = new Order;
         if ($order->load(Yii::$app->request->post())) {
@@ -72,6 +72,7 @@ class CartController extends Controller
             $order->sum = $session['cart.totalSum'];
             if ($order->save()) {
                 $currentId = $order->id;
+                $_SESSION['successOrder'] = $currentId;
                 $this->saveOrderInfo($session['cart'], $currentId);
                 Yii::$app->mailer->compose('order-mail', ['session' => $session, 'order' => $order])
                     ->setFrom(['semenovsemendev@gmail.com' => 'Вкусные Суши'])
