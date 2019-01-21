@@ -83,7 +83,7 @@ class CartController extends Controller
                 $session->remove('cart.totalQuantity');
                 $session->remove('cart.totalSum');
                 unset($_POST);
-                return $this->render('success', compact('session', 'currentId'));
+                return $this->render('preSuccess', compact('session', 'currentId'));
             }
         }
 
@@ -91,9 +91,14 @@ class CartController extends Controller
         return $this->render('order', compact('session', 'order'));
     }
 
+    public function actionSuccess()
+    {
+        return $this->render('success', compact('session', 'currentId'));
+    }
+
     protected function saveOrderInfo($goods, $orderId)
     {
-        foreach($goods as $id => $good){
+        foreach ($goods as $id => $good) {
             $orderInfo = new OrderGood();
             $orderInfo->order_id = $orderId;
             $orderInfo->product_id = $id;
