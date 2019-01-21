@@ -2,6 +2,7 @@
 <?php if ($session['cart']){ ?>
 <table class="table table-striped">
 
+
     <thead>
     <tr>
         <th scope="col">Фото</th>
