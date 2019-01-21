@@ -16,6 +16,7 @@ use app\models\Good;
 use app\models\Order;
 use app\models\OrderGood;
 use Yii;
+use yii\helpers\Url;
 
 class CartController extends Controller
 {
@@ -62,28 +63,44 @@ class CartController extends Controller
     {
         $session = Yii::$app->session;
         $session->open();
-        $order = new Order;
-        if($session['cart.totalSum']) {
-            if ($order->load(Yii::$app->request->post())){
-                $order->date = date('Y-m-d H:i:s');
-                $order->sum = $session['cart.totalSum'];
-
-                if ($order->save()){
-                    Yii::$app->mailer->compose()
-                        ->setFrom(['aaa@aaaa.ru' => 'test test'])
-                        ->setTo('asdasd@sdadas.ru')
-                        ->setSubject('Ваш заказ принят')
-                        ->send();
-                    $session->remove('cart');
-                    $session->remove('cart.totalQuantity');
-                    $session->remove('cart.totalSum');
-                    return $this->render('success', compact('session'));
-                }
-            }
-        }else {
-            echo 'Что-то пошло не так';
+        if (!$session['cart.totalSum']) {
+            return Yii::$app->response->redirect(Url::to('/'));
         }
+        $order = new Order;
+        if ($order->load(Yii::$app->request->post())) {
+            $order->date = date('Y-m-d H:i:s');
+            $order->sum = $session['cart.totalSum'];
+            if ($order->save()) {
+                $currentId = $order->id;
+                $this->saveOrderInfo($session['cart'], $currentId);
+                Yii::$app->mailer->compose('order-mail', ['session' => $session, 'order' => $order])
+                    ->setFrom(['semenovsemendev@gmail.com' => 'Вкусные Суши'])
+                    ->setTo($order->email)
+                    ->setSubject('Ваш заказ принят')
+                    ->send();
+                $session->remove('cart');
+                $session->remove('cart.totalQuantity');
+                $session->remove('cart.totalSum');
+                unset($_POST);
+                return $this->render('success', compact('session', 'currentId'));
+            }
+        }
+
         $this->layout = 'empty-layout';
         return $this->render('order', compact('session', 'order'));
+    }
+
+    protected function saveOrderInfo($goods, $orderId)
+    {
+        foreach($goods as $id => $good){
+            $orderInfo = new OrderGood();
+            $orderInfo->order_id = $orderId;
+            $orderInfo->product_id = $id;
+            $orderInfo->name = $good['name'];
+            $orderInfo->price = $good['price'];
+            $orderInfo->quantity = $good['goodQuantity'];
+            $orderInfo->sum = $good['price'] * $good['goodQuantity'];
+            $orderInfo->save();
+        }
     }
 }

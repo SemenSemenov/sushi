@@ -127,3 +127,12 @@ form {
 .header-order {
     margin: 20px;
 }
+
+.order-index {
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.footer-admin {
+    background-color: #222222;
+}

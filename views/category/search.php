@@ -21,7 +21,7 @@
             </div>
         <?php endforeach; ?>
     <?php } else { ?>
-        <h4 style="text-align: center;">Нчиего не найдено :(</h4>
+        <h4 class="product" style="text-align: center;">Нчиего не найдено :(</h4>
         <?php } ?>
     </div>
 </div>

@@ -29,7 +29,7 @@ class Order extends \yii\db\ActiveRecord
         return [
             [['name', 'email', 'phone', 'address'], 'required'],
             [['email'], 'email'],
-            [['name', 'email', 'phone', 'address'], 'string', 'max' => 255],
+            [['name', 'email', 'phone', 'address', 'status'], 'string', 'max' => 255],
         ];
     }
 
@@ -41,5 +41,10 @@ class Order extends \yii\db\ActiveRecord
             'phone' => 'Телефон',
             'address' => 'Адрес',
         ];
+    }
+
+    public function getOrderGoods()
+    {
+        return $this->hasMany(OrderGood::class, ['order_id' => 'id']);
     }
 }
