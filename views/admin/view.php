@@ -47,6 +47,6 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php
     $goods = $model->orderGoods;
     foreach ($goods as $good) { ?>
-        <div>-<?= $good['name'] ?>в количестве <?= $good['quantity'] ?> шт. на сумму <?= $good['sum'] ?> руб.</div>
+        <div>-<?= $good['name'] ?> в количестве <?= $good['quantity'] ?> шт. на сумму <?= $good['sum'] ?> руб.</div>
 <?php } ?>
 </div>
